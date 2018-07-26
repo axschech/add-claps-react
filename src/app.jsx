@@ -44,7 +44,7 @@ class AddClapsApp extends React.Component {
 		if (!this.state.value) {
 			return;
 		}
-		this.setState(function (prev) {
+		this.setState(prev => {
 			let string = this.state.value.trim() + ' ',
          		strippedValue = string.replace(new RegExp('[' + ' ' + ']', 'g'), EMOTE);
 
@@ -53,7 +53,6 @@ class AddClapsApp extends React.Component {
 				value: ''
 			}
 		});
-		console.log(this.state.list, 'handleSubmit');
 	}
 
 	render() {
