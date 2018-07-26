@@ -9,15 +9,15 @@ const EMOTE = '👏';
 function ListItems(props) {
 	const list = props.list;
 	const listItems = list.map((string) => 
-		<li key={globalIDCounter++}>
+		<p key={globalIDCounter++}>
 			{string}
-		</li>
+		</p>
 	);
 
 	return (
-		<ul>
+		<div className="clapText">
 			{listItems}
-		</ul>
+		</div>
 	);
 }
 
@@ -46,7 +46,7 @@ class AddClapsApp extends React.Component {
 		}
 		this.setState(prev => {
 			let string = this.state.value.trim() + ' ',
-         		strippedValue = string.replace(new RegExp('[' + ' ' + ']', 'g'), EMOTE);
+         		strippedValue = string.replace(new RegExp('[' + ' ' + ']', 'g'), ' ' + EMOTE + ' ');
 
 			return {
 				list: [...prev.list, strippedValue],
@@ -93,15 +93,25 @@ class InputForm extends React.Component {
 		const value = this.props.value;
 		const list = this.props.list;
 		return (
-			<div>
+			<div className="container">
+				<h1>Add Claps</h1>
 				<form onSubmit={this.handleSubmit}>
-					<fieldset>
-				        <legend>Claps:</legend>
-				        <input value={value}
-				               onChange={this.handleChange} />
-				        <input type="submit" 
-				        		onSubmit={this.handleSubmit} />
-			       </fieldset>
+					<div className="form-group">
+						<div className="row">
+							<div className="col-sm-10">
+								<input value={value}
+							       placeholder="type stuff here to add claps"
+					               onChange={this.handleChange}
+					               className="form-control input-lg" />
+							</div>
+							<div className="col-sm-2">
+								<button type="submit" 
+					        		className="form-control input-lg"
+					        		onSubmit={this.handleSubmit}>{EMOTE}
+						        </button>
+							</div>
+				        </div>
+				    </div>
 		       </form>
 		       <ListItems list={list} />
 	       </div>
