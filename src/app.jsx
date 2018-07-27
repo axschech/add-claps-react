@@ -101,13 +101,12 @@ class AddClapsApp extends React.Component {
 		const list = this.state.list;
 
 		return (
-			<div>
+			<div className="container">
 				<InputForm
 					value={value}
-					list={list}
 					onChange={this.handleChange} 
 					onSubmit={this.handleSubmit} />
-
+				<ListItems list={list} />
 			</div>
 		);
 	}
@@ -132,9 +131,8 @@ class InputForm extends React.Component {
 
 	render() {
 		const value = this.props.value;
-		const list = this.props.list;
 		return (
-			<div className="container">
+			<div>
 				<h1>Add Claps</h1>
 				<form onSubmit={this.handleSubmit}>
 					<div className="form-group">
@@ -155,7 +153,6 @@ class InputForm extends React.Component {
 				        </div>
 				    </div>
 		       </form>
-		       <ListItems list={list} />
 	       </div>
 		)
 	}
