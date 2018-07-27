@@ -19,8 +19,8 @@
   },
   "homepage": "https://github.com/axschech/add-claps-react#readme",
   "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

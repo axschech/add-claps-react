@@ -6,12 +6,53 @@ var globalIDCounter = 1;
 
 const EMOTE = '👏';
 
+class SelectContent extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.selectItem = this.selectItem.bind(this);
+		this.rawElement = this.props.rawElement;
+	}
+
+	selectItem(e) {
+		let selection = window.getSelection(),
+			range = document.createRange();
+		e.preventDefault();
+		range.selectNodeContents(this.rawElement.current.childNodes[0]);
+		selection.removeAllRanges();
+		selection.addRange(range);
+		document.execCommand('copy');
+
+	}
+	render() {
+		return (
+			<a href="#" onClick={this.selectItem}>copy</a>
+		);
+	};
+};
+
+class ListItem extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.string = props.string;
+		this.key = props.id;
+		this.listItemElement = React.createRef();
+	}
+
+	render() {
+		return (
+			<p ref={this.listItemElement}>
+				{this.string} <SelectContent rawElement={this.listItemElement} />
+			</p>
+		);
+	}
+}
+
 function ListItems(props) {
 	const list = props.list;
 	const listItems = list.map((string) => 
-		<p key={globalIDCounter++}>
-			{string}
-		</p>
+		<ListItem string={string} key={globalIDCounter++} />
 	);
 
 	return (
@@ -100,6 +141,7 @@ class InputForm extends React.Component {
 						<div className="row">
 							<div className="col-sm-10">
 								<input value={value}
+								   autoFocus
 							       placeholder="type stuff here to add claps"
 					               onChange={this.handleChange}
 					               className="form-control input-lg" />
