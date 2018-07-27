@@ -6,6 +6,56 @@ var globalIDCounter = 1;
 
 const EMOTE = '👏';
 
+class AddClapsApp extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+
+		this.state = {
+			list: [],
+			value: ''
+		};
+	}
+
+	handleChange(value) {
+		this.setState({
+			value: value
+		})
+	}
+
+	handleSubmit() {
+		if (!this.state.value) {
+			return;
+		}
+		this.setState(prev => {
+			let string = this.state.value.trim() + ' ',
+         		strippedValue = string.replace(new RegExp('[' + ' ' + ']', 'g'), ' ' + EMOTE + ' ');
+
+			return {
+				list: [...prev.list, strippedValue],
+				value: ''
+			}
+		});
+	}
+
+	render() {
+		const value = this.state.value;
+		const list = this.state.list;
+
+		return (
+			<div className="container">
+				<InputForm
+					value={value}
+					onChange={this.handleChange} 
+					onSubmit={this.handleSubmit} />
+				<ListItems list={list} />
+			</div>
+		);
+	}
+}
+
 class SelectContent extends React.Component {
 	constructor(props) {
 		super(props);
@@ -60,56 +110,6 @@ function ListItems(props) {
 			{listItems}
 		</div>
 	);
-}
-
-class AddClapsApp extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-
-		this.state = {
-			list: [],
-			value: ''
-		};
-	}
-
-	handleChange(value) {
-		this.setState({
-			value: value
-		})
-	}
-
-	handleSubmit() {
-		if (!this.state.value) {
-			return;
-		}
-		this.setState(prev => {
-			let string = this.state.value.trim() + ' ',
-         		strippedValue = string.replace(new RegExp('[' + ' ' + ']', 'g'), ' ' + EMOTE + ' ');
-
-			return {
-				list: [...prev.list, strippedValue],
-				value: ''
-			}
-		});
-	}
-
-	render() {
-		const value = this.state.value;
-		const list = this.state.list;
-
-		return (
-			<div className="container">
-				<InputForm
-					value={value}
-					onChange={this.handleChange} 
-					onSubmit={this.handleSubmit} />
-				<ListItems list={list} />
-			</div>
-		);
-	}
 }
 
 class InputForm extends React.Component {
