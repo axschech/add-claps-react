@@ -75,8 +75,6 @@ class TwitterComponent extends React.Component {
 			<span>
 				<TweetClap url={this.url} item={this.item} />
 				<TweetReply show={this.showEdit}
-							handleChange={this.handleChange}
-							handleSubmit={this.handleSubmit}
 							handleClick={this.handleClick}
 							url={this.url}
 							item={this.item} />
@@ -107,7 +105,6 @@ class TweetReply extends React.Component {
 	}
 
 	handleClick(e) {
-		console.log(this.props.handleClick);
 		this.props.handleClick();
 		e.preventDefault()
 	}
@@ -198,8 +195,8 @@ class ListItem extends React.Component {
 					show={showEdit}
 					submitText={'Reply'} 
 					placeholder={'Put the tweet url here'}
-					handleSubmit={this.handleSubmit} 
-					handleChange={this.handleChange} />
+					onSubmit={this.handleTweetReplySubmit} 
+					onChange={this.handleTweetReplyChange} />
 			</div>
 		);
 	}
@@ -221,7 +218,7 @@ function ListItems(props) {
 class InputForm extends React.Component {
 	constructor(props) {
 		super(props);
-		console.log(props);
+
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -242,7 +239,7 @@ class InputForm extends React.Component {
 			  handleChange = this.handleChange,
 			  handleSubmit = this.handleSubmit,
 			  show = this.props.show;
-		console.log(show, submitText + "inputform");
+
 		if (show === false) {
 			return null;
 		}
