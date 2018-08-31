@@ -84,11 +84,11 @@ class TwitterComponent extends React.Component {
 }
 
 function TweetClap(props) {
-	const url = props.url;
-	const item = props.item;
-	const reply = props.reply || false;
-	const baseUrl = url + item;
-	const fullUrl = reply ? baseUrl + reply : baseUrl;
+	const url = props.url,
+		item = props.item,
+		reply = props.reply || false,
+		baseUrl = url + item,
+		fullUrl = reply ? baseUrl + reply : baseUrl;
 
 	return (
 		<a href={fullUrl} target='_blank'>tweet</a>
@@ -180,7 +180,7 @@ class ListItem extends React.Component {
 
 	render() {
 		const showEdit = this.state.showEdit;
-		console.log(showEdit, 'ListItem');
+		
 		return (
 			<div>
 				<div ref={this.listItemElement}>
@@ -203,8 +203,8 @@ class ListItem extends React.Component {
 }
 
 function ListItems(props) {
-	const list = props.list;
-	const listItems = list.map((string) => 
+	const list = props.list,
+		listItems = list.map((string) => 
 		<ListItem string={string} key={globalIDCounter++} />
 	);
 
