@@ -1,37 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import urlParser from 'url';
+
 
 class TwitterComponent extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.item = props.item;
 		this.url = 'https://twitter.com/intent/tweet?text=';
-		this.handleChange = props.handleChange;
-		this.handleSubmit = props.handleSubmit;
 		this.handleClick = props.handleClick;
-		this.showEdit = props.showEdit;
 	}
 
 	render() {
+		const reply = this.props.reply,
+			  item = this.props.item,
+			  show = this.props.show;
 		return (
 			<span>
-				<TweetClap url={this.url} item={this.item} />
-				<TweetReply show={this.showEdit}
-							handleClick={this.handleClick}
+				<TweetClap url={this.url} item={item} reply={reply} />
+				<TweetReply handleClick={this.handleClick}
 							url={this.url}
-							item={this.item} />
+							reply={reply}
+							show={show} />
 			</span>
 		);
 	}
 }
 
+// TODO: parse URL 
 function TweetClap(props) {
+	
 	const url = props.url,
 		item = props.item,
 		reply = props.reply || false,
 		baseUrl = url + item,
-		fullUrl = reply ? baseUrl + reply : baseUrl;
+		fullUrl = reply ? baseUrl + '&in_reply_to=' + reply : baseUrl;
 
 	return (
 		<a href={fullUrl} target='_blank'>tweet</a>
@@ -42,8 +45,6 @@ class TweetReply extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.item = props.item;
-		this.url = props.url;
 		this.handleClick = this.handleClick.bind(this);
 	}
 
@@ -53,8 +54,11 @@ class TweetReply extends React.Component {
 	}
 
 	render() {
+		const reply = this.props.reply,
+			  show = reply && !this.props.show;
+
 		return (
-			<a href="#" onClick={this.handleClick}>(reply)</a>
+			 <a href="#" onClick={this.handleClick}>(reply){show && <span>| Replying to: {reply}</span>}</a>
 		)
 	}
 }

@@ -42,8 +42,8 @@ class AddClapsApp extends React.Component {
 	}
 
 	render() {
-		const value = this.state.value;
-		const list = this.state.list;
+		const value = this.state.value,
+			  list = this.state.list;
 
 		return (
 			<div className="container">

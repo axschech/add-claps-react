@@ -4,8 +4,6 @@ import InputForm from '../input/input.jsx';
 import SelectContent from '../select-text.jsx';
 import TwitterComponent from '../twitter/twitter.jsx';
 
-console.log(SelectContent);
-
 class ListItem extends React.Component {
 	constructor(props) {
 		super(props);
@@ -13,7 +11,6 @@ class ListItem extends React.Component {
 		this.string = props.string;
 		this.key = props.id;
 		this.listItemElement = React.createRef();
-
 		this.state = {
 			showEdit: false,
 			replyID: ''
@@ -44,21 +41,21 @@ class ListItem extends React.Component {
 
 	render() {
 		const showEdit = this.state.showEdit;
-		
+
 		return (
 			<div>
-				<div ref={this.listItemElement}>
+				<div>
 					{this.string} <SelectContent rawElement={this.listItemElement} /> | <TwitterComponent 
 						item={this.string}
-						handleChange={this.handleTweetReplyChange}
-						handleSubmit={this.handleTweetReplySubmit}
+						reply={this.state.replyID}
 						handleClick={this.handleTweetReplyClick}
-						showEdit={showEdit} />
+						show={showEdit} />
 				</div>
 				<InputForm
 					show={showEdit}
-					submitText={'Reply'} 
+					submitText={'Set'} 
 					placeholder={'Put the tweet url here'}
+					value={this.state.replyID}
 					onSubmit={this.handleTweetReplySubmit} 
 					onChange={this.handleTweetReplyChange} />
 			</div>
