@@ -1,7 +1,9 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/app.jsx',
+  entry: {
+    index: './src/app.jsx'
+  },
   output: {
     publicPath: '/dist/',
     path: path.resolve('dist'),
