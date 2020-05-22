@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+
+import { Header } from './components/Header';
+import { Input, UpdateItems, EMOTE } from './components/Input';
+
 import './App.css';
 
+import { ListItemsProps, ListItems } from './components/List';
+
 function App() {
+  const [state, setState] = useState<ListItemsProps>({items:[]}),
+    updateItems: UpdateItems = (value) => {
+      const { items } = state,
+      strippedValue = value.trim().replace(
+        new RegExp('[ ]', 'g'), ' ' + EMOTE + ' '
+      );
+
+      setState({items: [...items, `${strippedValue} ${EMOTE}`]})
+    }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header text='Add Claps' />
+      <div className='container'>
+        <Input updateItems={updateItems} placeholder={'Type here to add claps'} />
+        <ListItems items={state.items} />
+      </div>
     </div>
   );
 }
