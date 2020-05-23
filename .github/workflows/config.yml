@@ -21,9 +21,6 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-      with: 
-        token: ${{ secrets.GITHUB_TOKEN }}
-        persist-credentials: true
 
     # Runs a set of commands using the runners shell
     - name: Deploy
@@ -34,9 +31,7 @@ jobs:
         yarn
         yarn build
         git checkout master
-        git status
         git add --force .
-        git status
         git commit -m "update"
         git subtree split --prefix build -b gh-pages
         git push -f origin gh-pages:gh-pages
