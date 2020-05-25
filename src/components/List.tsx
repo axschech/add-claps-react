@@ -10,7 +10,7 @@ export const ListItem = (props:ListItemProps) => {
     const rawElement = useRef(null)
 
     return <div className='clapText' ref={rawElement}>
-        <div className='row align-items-center'>
+        <div className='form-row align-items-center'>
             <span className='col-sm-8'>{props.item}</span>
             <span className='col'><Select element={rawElement} /></span>
             <span className='col'><Tweet value={props.item} className={'btn btn-primary btn-block'} /></span>

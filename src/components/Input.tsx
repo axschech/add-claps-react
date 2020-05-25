@@ -48,7 +48,7 @@ export const Input = (props:InputProps) => {
         setValue('')
     }}>
             <div className='form-row align-items-center mb-3'>
-                <div className='col-sm-8'>
+                <div className='col-md-8 m-xl-0 m-lg-0 m-md-0 mb-sm-3 mb-3'>
                     <input 
                         type="text" 
                         value={value}
@@ -61,7 +61,7 @@ export const Input = (props:InputProps) => {
                     <button type="submit" className='btn btn-primary btn-block'>{EMOTE}</button>
                 </div>
                 <div className='col'>
-                    <Tweet className={'btn btn-primary btn-block'} value={value} setValue={passClaps} /> 
+                    <Tweet className={'btn btn-primary btn-block'} value={addClaps(value)} setValue={passClaps} /> 
                 </div>
             </div>
         </form>
