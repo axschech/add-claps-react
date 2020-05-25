@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { ReactComponent as TwitterLogo } from '../twitter.svg'
+
 const TWEET_URL = 'https://twitter.com/intent/tweet?text=';
 
 export interface TweetProps {
@@ -14,4 +16,6 @@ export const Tweet = (props:TweetProps) => <button type='button' className={prop
         if (props.setValue) {
             props.setValue();
         }
-    }}><span role='img' aria-label='Tweet'>🐦</span></button>
+    }}>
+        <TwitterLogo className='emoticon-image' />
+    </button>
