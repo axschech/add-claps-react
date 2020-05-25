@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Tweet } from './Tweet';
 
 export const EMOTE = '👏';
@@ -25,7 +25,7 @@ export const Input = (props:InputProps) => {
     
     useEffect(() => {
         textInput?.focus();
-    }, [])
+    }, [textInput])
 
     const [value, setValue] = useState(props.value || ''),
         addClaps = (input:string) => {
