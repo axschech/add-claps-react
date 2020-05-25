@@ -10,9 +10,11 @@ export const ListItem = (props:ListItemProps) => {
     const rawElement = useRef(null)
 
     return <div className='clapText' ref={rawElement}>
-        <span className='p-3'>{props.item}</span>
-        <span className='p-3'><Select element={rawElement} /></span>
-        <span className='p-3'><Tweet value={props.item} className={'btn btn-primary'} /></span>
+        <div className='row align-items-center'>
+            <span className='col-sm-8'>{props.item}</span>
+            <span className='col'><Select element={rawElement} /></span>
+            <span className='col'><Tweet value={props.item} className={'btn btn-primary btn-block'} /></span>
+        </div>
     </div>
 };
 
@@ -21,8 +23,13 @@ export interface ListItemsProps {
 }
 
 export const ListItems = (props: ListItemsProps) => {
+    const length = props.items.length;
+
     const itemsElements = props.items.map((item, i) => {
-        return <ListItem item={item} key={i} />
+        return <div key={i}>
+             {length > 0 && i!== 0 && i !== length && <hr />}
+            <ListItem item={item} />
+        </div>;
     })
 
     return <section>{itemsElements}</section>

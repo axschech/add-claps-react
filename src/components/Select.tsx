@@ -4,8 +4,8 @@ export interface SelectProps{
     element: any
 }
 
-export const Select = (props:any) => {
-    const select = (e:React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+export const Select = (props:SelectProps) => {
+    const select = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         const selection = window.getSelection(),
             range = document.createRange();
 
@@ -16,5 +16,9 @@ export const Select = (props:any) => {
             selection?.addRange(range);
             document.execCommand('copy');
     }
-    return <a href="/" onClick={select}>copy</a>
+    return <button type='button'  className='btn btn-primary btn-block' onClick={select}>
+        <span role='img' aria-label='copy'>
+        ✂️
+        </span>
+    </button>
 }
