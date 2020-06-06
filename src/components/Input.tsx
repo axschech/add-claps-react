@@ -36,6 +36,9 @@ export const Input = (props:InputProps) => {
             return `${strippedValue} ${EMOTE}`
         },
         passClaps = () => {
+            if (value === "") {
+                return;
+            }
             const withClaps = addClaps(value);
         
             props.updateItems(withClaps);
@@ -43,7 +46,9 @@ export const Input = (props:InputProps) => {
         }
     return <form onSubmit={(e) => { 
         e.preventDefault();
-        
+        if (value === "") {
+            return;
+        }
         props.updateItems(addClaps(value));
         setValue('')
     }}>

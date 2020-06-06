@@ -12,7 +12,7 @@ function App() {
     updateItems: UpdateItems = (value) => {
       const { items } = state;
      
-      setState({items: [...items, value]})
+      setState({items: [value, ...items]})
     }
 
   return (
