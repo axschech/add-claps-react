@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { ItemStorer } from './storage';
+
 import { Header } from './components/Header';
 import { Input, UpdateItems } from './components/Input';
 
@@ -8,10 +10,13 @@ import './App.css';
 import { ListItemsProps, ListItems } from './components/List';
 
 function App() {
-  const [state, setState] = useState<ListItemsProps>({items:[]}),
+  const ls = new ItemStorer();
+
+  const [state, setState] = useState<ListItemsProps>(ls.get()),
     updateItems: UpdateItems = (value) => {
       const { items } = state;
-     
+      
+      ls.save({items: [value, ...items]})
       setState({items: [value, ...items]})
     }
 
